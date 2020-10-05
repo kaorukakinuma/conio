@@ -1,37 +1,36 @@
 /*
  *    file:             getch.c
  *    creation date:    2020-10-05
- *    last update:      2020-10-05
+ *    last update:      2020-10-06
  *    author:           kaoru kakinuma
  */
-#include <termios.h>
 #include <stdio.h>
+#include <termios.h>
+#include <unistd.h>
 
-#include "getch.h"
-
-static struct termios sOld, sCurrent;
+static struct termios sOld, sNew;
 
 /* Initialize new terminal i/o settings */
 static void initTermios( void ) 
 {
-    tcgetattr( 0, &sOld ); /* grab old terminal i/o settings */
-    sCurrent = sOld; /* make new settings same as old settings */
-    sCurrent.c_lflag &= ~ICANON; /* disable buffered i/o */
-    sCurrent.c_lflag &= ~ECHO; /* set no echo mode */
-    tcsetattr( 0, TCSANOW, &sCurrent ); /* use these new terminal i/o settings now */
+    tcgetattr( STDIN_FILENO, &sOld ); /* grab old terminal i/o settings */
+    sNew = sOld; /* make new settings same as old settings */
+    sNew.c_lflag &= ~ICANON; /* disable buffered i/o */
+    sNew.c_lflag &= ~ECHO; /* set no echo mode */
+    tcsetattr( STDIN_FILENO, TCSANOW, &sNew ); /* use these new terminal i/o settings now */
 }
 
 /* Restore old terminal i/o settings */
 static void resetTermios( void ) 
 {
-    tcsetattr( 0, TCSANOW, &sOld );
+    tcsetattr( STDIN_FILENO, TCSANOW, &sOld );
 }
 
 /* Read a character */
-char getch( void )
+int getch( void )
 {
     initTermios();
-    char ch = getchar();
+    int ch = getchar();
     resetTermios();
     return ch;
 }

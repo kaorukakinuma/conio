@@ -1,20 +1,20 @@
-# Getch
+# Conio
 
 + Dependencies: `none`
-+ Includes: `getch.h`
++ Includes: `conio.h`
 
 
 ## How to build
 
 ```
-$ git clone https://github.com/kaorukakinuma/getch.git
-$ cd getch
+$ git clone https://github.com/kaorukakinuma/conio.git
+$ cd conio
 $ sudo ./mk.sh
 #snip
 $ ls /home/lib
-libgetch.a
+libconio.a
 $ ls /home/include
-getch.h
+conio.h
 ```
 
 
@@ -29,13 +29,15 @@ $ ./test/run.sh
 
 ```c
 #include <stdio.h>
-#include <getch.h>
+#include <conio.h>
 
 int main( void )
 {
     while ( 1 ) {
-        char ch = getch();
-        printf( "%c ", ch );
+        if ( kbhit() ) {
+            char ch = getch();
+            printf( "%c", ch );
+        }
     }
 
     return 0;

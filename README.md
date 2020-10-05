@@ -23,3 +23,21 @@ getch.h
 ```
 $ ./test/run.sh
 ```
+
+
+## Usage
+
+```c
+#include <stdio.h>
+#include <getch.h>
+
+int main( void )
+{
+    while ( 1 ) {
+        char ch = getch();
+        printf( "%c ", ch );
+    }
+
+    return 0;
+}
+```

@@ -11,7 +11,7 @@
 static struct termios sOld, sNew;
 
 /* Initialize new terminal i/o settings */
-static void initTermios( void ) 
+static void init_termios( void ) 
 {
     tcgetattr( STDIN_FILENO, &sOld ); /* grab old terminal i/o settings */
     sNew = sOld; /* make new settings same as old settings */
@@ -21,7 +21,7 @@ static void initTermios( void )
 }
 
 /* Restore old terminal i/o settings */
-static void resetTermios( void ) 
+static void reset_termios( void ) 
 {
     tcsetattr( STDIN_FILENO, TCSANOW, &sOld );
 }
@@ -29,8 +29,8 @@ static void resetTermios( void )
 /* Read a character */
 int getch( void )
 {
-    initTermios();
+    init_termios();
     int ch = getchar();
-    resetTermios();
+    reset_termios();
     return ch;
 }

@@ -12,7 +12,7 @@
 static struct termios sOld, sNew;
 
 /* Initialize new terminal i/o settings */
-static void initTermios( void ) 
+static void init_termios( void ) 
 {
     tcgetattr( STDIN_FILENO, &sOld ); /* grab old terminal i/o settings */
     sNew = sOld; /* make new settings same as old settings */
@@ -22,7 +22,7 @@ static void initTermios( void )
 }
 
 /* Restore old terminal i/o settings */
-static void resetTermios( void ) 
+static void reset_termios( void ) 
 {
     tcsetattr( STDIN_FILENO, TCSANOW, &sOld );
 }
@@ -30,12 +30,12 @@ static void resetTermios( void )
 /* Detect key press */
 int kbhit( void )
 {
-    initTermios();
+    init_termios();
     int fd = fcntl( STDIN_FILENO, F_GETFL, 0 );
     fcntl( STDIN_FILENO, F_SETFL, fd | O_NONBLOCK );
     int ch = getchar();
     fcntl( STDIN_FILENO, F_SETFL, fd );
-    resetTermios();
+    reset_termios();
 
     if ( ch != EOF ) {
         ungetc( ch, stdin );

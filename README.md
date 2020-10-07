@@ -1,27 +1,18 @@
 # Conio
 
-+ Dependencies: `none`
-+ Includes: `conio.h`
+Dependencies: `none`  
+Includes: `conio.h`
 
 
-## How to build
+## How to Build
 
-```
-$ git clone https://github.com/kaorukakinuma/conio.git
-$ cd conio
+```sh
 $ sudo ./mk.sh
 #snip
 $ ls /home/lib
 libconio.a
 $ ls /home/include
 conio.h
-```
-
-
-## How to run a test
-
-```
-$ ./test/run.sh
 ```
 
 
@@ -33,10 +24,12 @@ $ ./test/run.sh
 
 int main( void )
 {
+    printf( "Press any key.\n" );
     while ( 1 ) {
         if ( kbhit() ) {
             char ch = getch();
-            printf( "%c", ch );
+            printf( "%c is pressed.", ch );
+            break;
         }
     }
 

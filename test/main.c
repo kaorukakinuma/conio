@@ -1,14 +1,16 @@
 #include <stdio.h>
-#include "getch.h"
+#include <conio.h>
 
-int main( int argc, char *argv[] )
+int main( void )
 {
-    (void)argc;
-    (void)argv;
+    printf( "Press any key.\n" );
 
     while ( 1 ) {
-        char ch = getch();
-        printf( "%c ", ch );
+        if ( kbhit() ) {
+            char ch = getch();
+            printf( "%c is pressed.", ch );
+            break;
+        }
     }
 
     return 0;

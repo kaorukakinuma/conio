@@ -11,7 +11,7 @@ OBJS =\
 
 LIBPATH = /home/lib/
 LIBS =\
-	-lgetch
+	-lconio
 
 INCPATH = /home/include/
 

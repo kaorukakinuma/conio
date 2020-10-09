@@ -1,27 +1,18 @@
-# Getch
+# Conio
 
-+ Dependencies: `none`
-+ Includes: `getch.h`
+Dependencies: `none`  
+Includes: `conio.h`
 
 
-## How to build
+## How to Build
 
-```
-$ git clone https://github.com/kaorukakinuma/getch.git
-$ cd getch
+```sh
 $ sudo ./mk.sh
 #snip
 $ ls /home/lib
-libgetch.a
+libconio.a
 $ ls /home/include
-getch.h
-```
-
-
-## How to run a test
-
-```
-$ ./test/run.sh
+conio.h
 ```
 
 
@@ -29,13 +20,18 @@ $ ./test/run.sh
 
 ```c
 #include <stdio.h>
-#include <getch.h>
+#include <conio.h>
 
 int main( void )
 {
+    printf( "Press any key.\n" );
+
     while ( 1 ) {
-        char ch = getch();
-        printf( "%c ", ch );
+        if ( kbhit() ) {
+            char ch = getch();
+            printf( "%c is pressed.", ch );
+            break;
+        }
     }
 
     return 0;

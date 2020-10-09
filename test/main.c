@@ -4,6 +4,7 @@
 int main( void )
 {
     printf( "Press any key.\n" );
+
     while ( 1 ) {
         if ( kbhit() ) {
             char ch = getch();
